@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
+    window.onload = function() {
+    var socket = io('http://127.0.0.1:5000');
+
+    socket.on('connect', function() {
+         socket.emit('conexao', {data: 'Cliente 2 conectado!'});
+    });
+
+    function tocarAviso() {
+        const som = new Audio('./static/audio/aviso.mp3');
+        som.play();
+    }
+
+    socket.on('atualizar_resultado', function(data) {
+        var consultorio = data.consultorio;
+        var paciente = data.paciente;
+        var estagiario = data.estagiario;
+        document.getElementById('1').innerHTML = consultorio;
+        document.getElementById('2').innerHTML = paciente;
+        document.getElementById('3').innerHTML = estagiario;
+        tocarAviso();
+    });
+    }
+</script>
+    <h1>Clínica Escola Anhanguera</h1>
+    <p>Consultorio: <span id="1"></span></p>
+    <p>Paciente: <span id="2"></span></p>
+    <p>Estagiario: <span id="3"></span></p>
+</body>
+</html>
