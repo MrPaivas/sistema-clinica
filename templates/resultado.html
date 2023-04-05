@@ -18,21 +18,26 @@
         const som = new Audio('./static/audio/aviso.mp3');
         som.play();
     }
+    function tocarAudio() {
+        const som = new Audio('./static/audio/audio.mp3');
+        som.play();
+    }
 
     socket.on('atualizar_resultado', function(data) {
-        var consultorio = data.consultorio;
+        var consultorio = data.consultório;
         var paciente = data.paciente;
-        var estagiario = data.estagiario;
+        var estagiario = data.estagiário;
         document.getElementById('1').innerHTML = consultorio;
         document.getElementById('2').innerHTML = paciente;
         document.getElementById('3').innerHTML = estagiario;
         tocarAviso();
+        setTimeout(tocarAudio, 6000);
     });
     }
 </script>
     <h1>Clínica Escola Anhanguera</h1>
-    <p>Consultorio: <span id="1"></span></p>
+    <p>Consultório: <span id="1"></span></p>
     <p>Paciente: <span id="2"></span></p>
-    <p>Estagiario: <span id="3"></span></p>
+    <p>Estagiário: <span id="3"></span></p>
 </body>
 </html>

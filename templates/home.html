@@ -17,7 +17,7 @@
      document.querySelector("form").addEventListener("submit", function(event) {
         event.preventDefault();
 
-        socket.emit('envia_form', {consultorio: event.target[0].value, paciente: event.target[1].value, estagiario: event.target[2].value})
+        socket.emit('envia_form', {consultório: event.target[0].value, paciente: event.target[1].value, estagiário: event.target[2].value})
         event.target[0].value = "";
         event.target[1].value = "";
         event.target[2].value = "";
