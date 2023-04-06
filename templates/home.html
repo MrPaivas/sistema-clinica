@@ -3,12 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        input[type="text"] {
+            display: block;
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            background-color: #0069d9;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0051a8;
+        }
+    </style>
 </head>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf-8">
      window.onload = function() {
-     var socket = io('http://127.0.0.1:5000');
+     var socket = io('http://10.151.22.134:5000');
 
      socket.on('connect', function() {
          socket.emit('conexao', {data: 'cliente 1 conectado!'});
@@ -17,7 +57,7 @@
      document.querySelector("form").addEventListener("submit", function(event) {
         event.preventDefault();
 
-        socket.emit('envia_form', {consultório: event.target[0].value, paciente: event.target[1].value, estagiário: event.target[2].value})
+        socket.emit('envia_form', {consultorio: event.target[0].value, paciente: event.target[1].value, estagiario: event.target[2].value})
         event.target[0].value = "";
         event.target[1].value = "";
         event.target[2].value = "";

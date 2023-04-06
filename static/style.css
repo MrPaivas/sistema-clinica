@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    padding-top: 100px; /* adiciona um padding no topo */
+}
+
+h1 {
+    text-align: center;
+}
+
+.consulta,
+.consulta_antiga_1,
+.consulta_antiga_2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.consulta p,
+.consulta_antiga_1 p,
+.consulta_antiga_2 p {
+    margin: 5px 0;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.consulta span,
+.consulta_antiga_1 span,
+.consulta_antiga_2 span {
+    font-size: 36px;
+}
+
+.cabecalho {
+    background-color: #9ea7b8;
+    color: #fff;
+}
+
+.principal {
+    background-color: #b8c9e1;
+    color: green;
+    font-size: 36px;
+}
+
+.secundaria {
+    background-color: #d1ddec;
+    color: #000;
+}
+
+.terciaria {
+    background-color: #e5eef5;
+    color: #000;
+}
+
+/* Definindo as fontes */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 24px;
+    margin-top: 100px; /* adiciona uma margem superior */
+}
+
+th, td {
+    text-align: center;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Definindo a largura das colunas */
+th:first-child, td:first-child {
+    width: 40%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 30%;
+}
+
+th:last-child, td:last-child {
+    width: 30%;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    top: 75px;
+    left: 100px;
+    z-index: 1; /* adiciona um z-index para a imagem ficar na frente */
+}

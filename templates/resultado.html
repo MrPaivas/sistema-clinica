@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="./static/style.css">
 </head>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf-8">
     window.onload = function() {
-    var socket = io('http://127.0.0.1:5000');
+    var socket = io('http://10.151.22.134:5000');
 
     socket.on('connect', function() {
          socket.emit('conexao', {data: 'Cliente 2 conectado!'});
@@ -24,20 +25,62 @@
     }
 
     socket.on('atualizar_resultado', function(data) {
-        var consultorio = data.consultório;
+        var consultorio = data.consultorio;
         var paciente = data.paciente;
-        var estagiario = data.estagiário;
+        var estagiario = data.estagiario;
         document.getElementById('1').innerHTML = consultorio;
         document.getElementById('2').innerHTML = paciente;
         document.getElementById('3').innerHTML = estagiario;
         tocarAviso();
         setTimeout(tocarAudio, 6000);
     });
+
+    socket.on('consulta_velha', function(data) {
+        var consultorio1 = data.consultorio;
+        var paciente1 = data.paciente;
+        var estagiario1 = data.estagiario;
+        document.getElementById('4').innerHTML = consultorio1;
+        document.getElementById('5').innerHTML = paciente1;
+        document.getElementById('6').innerHTML = estagiario1;
+    });
+
+    socket.on('consulta_velha_2', function(data) {
+        var consultorio2 = data.consultorio;
+        var paciente2 = data.paciente;
+        var estagiario2 = data.estagiario;
+        document.getElementById('7').innerHTML = consultorio2;
+        document.getElementById('8').innerHTML = paciente2;
+        document.getElementById('9').innerHTML = estagiario2;
+    });
     }
 </script>
+    <img src="./static/img/logo.png" class="logo">
     <h1>Clínica Escola Anhanguera</h1>
-    <p>Consultório: <span id="1"></span></p>
-    <p>Paciente: <span id="2"></span></p>
-    <p>Estagiário: <span id="3"></span></p>
+    <div class="consulta">
+        <table>
+            <thead>
+                <tr class="cabecalho">
+                    <th>Consultório</th>
+                    <th>Paciente</th>
+                    <th>Estagiario</th>
+                </tr>
+            </thead>
+                <tr class="principal">
+                    <td><span id="1"></span></td>
+                    <td><span id="2"></span></td>
+                    <td><span id="3"></span></td>
+                </tr>
+                <tr class="secundaria">
+                    <td><span id="4"></span></td>
+                    <td><span id="5"></span></td>
+                    <td><span id="6"></span></td>
+                </tr>
+                <tr class="terciaria">
+                    <td><span id="7"></span></td>
+                    <td><span id="8"></span></td>
+                    <td><span id="9"></span></td>
+                </tr>
+        </table>
+    </div>
 </body>
 </html>
