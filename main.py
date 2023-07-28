@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 import pyttsx3
+import socket
 import os
 
 app = Flask(__name__)
@@ -12,7 +13,29 @@ consulta_2 = []
 lista = []
 
 
+def coleta_o_ip():
+    try:
+        # Cria um socket UDP
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+        # Conecta-se a um servidor público qualquer, apenas para obter o endereço IP local
+        s.connect(("8.8.8.8", 80))
+
+        # Obtém o endereço IP local
+        local_ip = s.getsockname()[0]
+
+        # Fecha o socket
+        s.close()
+        print(local_ip)
+        return local_ip
+    except Exception as e:
+        print("Ocorreu um erro ao obter o endereço IP local:", e)
+        return None
+ip = coleta_o_ip()
+link = 'http://' + ip + ':5000'
+
 def texto_p_audio(texto):
+    """ Cria um arquivo de audio transquito da mensagem recebida!"""
     mensagem = "Nova Consulta!"
     lista.append(mensagem)
     lista.append(texto)
@@ -27,12 +50,12 @@ def texto_p_audio(texto):
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', link=link)
 
 
 @app.route('/resultado', methods=['GET', 'POST'])
 def resultado():
-    return render_template('resultado.html')
+    return render_template('resultado.html', link=link)
 
 
 @socketio.on('conexao')
@@ -65,4 +88,4 @@ def handle_form_submission(dados):
 
 
 if __name__ == '__main__':
-    socketio.run(app, allow_unsafe_werkzeug=True, host='10.151.22.134', port= 5000)
+    socketio.run(app, allow_unsafe_werkzeug=True, host=ip, port= 5000)
