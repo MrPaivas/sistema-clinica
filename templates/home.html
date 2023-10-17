@@ -48,7 +48,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf-8">
      window.onload = function() {
-     var socket = io({{ link }});
+     var socket = io("{{ link }}");
 
      socket.on('connect', function() {
          socket.emit('conexao', {data: 'cliente 1 conectado!'});
@@ -70,7 +70,7 @@
     <form>
     <input type="text" id="consultorio" placeholder="Consultório"><br><br>
     <input type="text" id="paciente" placeholder="Paciente"><br><br>
-    <input type="text" id="estagiario" placeholder="Estagiario"><br><br>
+    <input type="text" id="estagiario" placeholder="Estagiário"><br><br>
     <input type="submit" value="Enviar">
 </form>
 </body>
