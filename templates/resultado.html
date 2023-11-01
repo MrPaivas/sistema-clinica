@@ -28,11 +28,15 @@
         var consultorio = data.consultorio;
         var paciente = data.paciente;
         var estagiario = data.estagiario;
+        var toca_som = data.toca_som
         document.getElementById('1').innerHTML = consultorio;
         document.getElementById('2').innerHTML = paciente;
         document.getElementById('3').innerHTML = estagiario;
         tocarAviso();
+        if (toca_som === true) {
         setTimeout(tocarAudio, 6000);
+        }
+        
     });
 
     socket.on('consulta_velha', function(data) {

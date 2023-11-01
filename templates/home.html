@@ -56,8 +56,10 @@
 
      document.querySelector("form").addEventListener("submit", function(event) {
         event.preventDefault();
+        var tocaSomCheckbox = event.target[3];
+        var tocaSomValue = tocaSomCheckbox.checked;
 
-        socket.emit('envia_form', {consultorio: event.target[0].value, paciente: event.target[1].value, estagiario: event.target[2].value})
+        socket.emit('envia_form', {consultorio: event.target[0].value, paciente: event.target[1].value, estagiario: event.target[2].value, toca_som: tocaSomValue})
         event.target[0].value = "";
         event.target[1].value = "";
         event.target[2].value = "";
@@ -68,10 +70,12 @@
      }
     </script>
     <form>
-    <input type="text" id="consultorio" placeholder="Consultório"><br><br>
-    <input type="text" id="paciente" placeholder="Paciente"><br><br>
-    <input type="text" id="estagiario" placeholder="Estagiário"><br><br>
-    <input type="submit" value="Enviar">
-</form>
+        <input type="text" id="consultorio" placeholder="Consultório"><br><br>
+        <input type="text" id="paciente" placeholder="Paciente"><br><br>
+        <input type="text" id="estagiario" placeholder="Estagiário"><br>
+        <input type="checkbox" id="toca_som" nome="toca-som">
+        <label for="toca-som">Ativar leitura de resultado.</label><br>
+        <input type="submit" value="Enviar">
+    </form>
 </body>
 </html>

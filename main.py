@@ -36,9 +36,11 @@ link = 'http://' + ip + ':5000'
 
 def texto_p_audio(texto):
     """ Cria um arquivo de audio transquito da mensagem recebida!"""
+    consulta = texto.copy()
+    consulta.pop("toca_som")
     mensagem = "Nova Consulta!"
     lista.append(mensagem)
-    lista.append(texto)
+    lista.append(consulta)
     os.remove('./static/audio/audio.mp3')
     engine.setProperty("voice", 0)
     engine.setProperty("gender", "male")
