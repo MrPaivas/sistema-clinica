@@ -10,6 +10,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 # Send a ping to confirm a successful connection
 db = client["sis-clinicas"]
 domains = db["domains"]
+users = db["users"]
 
 try:
     client.admin.command('ping')

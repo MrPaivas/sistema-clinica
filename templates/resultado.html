@@ -19,10 +19,31 @@
         const som = new Audio('./static/audio/aviso.mp3');
         som.play();
     }
-    function tocarAudio() {
-        const som = new Audio('./static/audio/audio.mp3');
-        som.play();
-    }
+    function reproduzirAudio(json, velocidade) {
+        // Obter o áudio base64 do JSON
+        const audioBase64 = json.audio_base64;
+
+        // Criar um elemento de áudio
+        const audioElement = new Audio();
+
+        // Converter o áudio base64 para Blob
+        const byteCharacters = atob(audioBase64);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'audio/wav' });
+
+        // Configurar o src do elemento de áudio com a URL do Blob
+        audioElement.src = URL.createObjectURL(blob);
+
+        // Definir a velocidade de reprodução
+        audioElement.playbackRate = velocidade;
+
+        // Reproduzir o áudio
+        audioElement.play();
+        }
 
     socket.on('atualizar_resultado', function(data) {
         var consultorio = data.consultorio;
@@ -33,11 +54,10 @@
         document.getElementById('2').innerHTML = paciente;
         document.getElementById('3').innerHTML = estagiario;
         tocarAviso();
-        if (toca_som === true) {
-        setTimeout(tocarAudio, 6000);
-        }
-        
-    });
+        setTimeout(function() {
+        reproduzirAudio(data, 1.5);
+            }, 3000);
+        });
 
     socket.on('consulta_velha', function(data) {
         var consultorio1 = data.consultorio;
