@@ -1,4 +1,5 @@
 from flask_socketio import SocketIO, emit
+import json
 
 from untils.text_to_audio import texto_p_audio
 from untils.text_format import format_text
@@ -32,6 +33,9 @@ def handle_form_submission(dados):
     recebe_consulta_velha_2()
     if dados.get('toca_som'):
         text = format_text(dados)
-        b64_audio = texto_p_audio(text)
-        dados.update(eval(b64_audio))
+        try:
+            b64_audio = texto_p_audio(text)
+            dados.update(json.loads(b64_audio))
+        except Exception as err:
+            print(err)
     emit('atualizar_resultado', dados, broadcast=True)
